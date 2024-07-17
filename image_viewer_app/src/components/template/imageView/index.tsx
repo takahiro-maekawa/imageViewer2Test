@@ -2,12 +2,13 @@
 import React, { useEffect, useRef } from 'react';
 import { fileInfoType } from "@/types/fileInfoType"
 
+import ImgViewerTestComp from "@/components/organism/imgViewerTestComp"
+
 interface Props {
   data: fileInfoType[]
 }
 
 export default function ImageView({ data }: Props) {
-  const holderRef = useRef(null);
   /** 
   
   var $ = require('jQuery');
@@ -20,10 +21,7 @@ export default function ImageView({ data }: Props) {
   */
   return (
     <div className="p-2">
-      <div ref={holderRef} id="myholder">
-        <img id="zoomImg" src="img/sample.jpg" alt="富士山" />
-        <div className="sample"></div>
-      </div>
+      <ImgViewerTestComp />
     </div>
   )
 }
