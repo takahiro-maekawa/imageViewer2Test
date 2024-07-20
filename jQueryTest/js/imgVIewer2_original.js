@@ -64,6 +64,8 @@ var waitForFinalEvent = (function () {
         var width = $img.width(),
           height = $img.height(),
           offset = $img.position();
+        console.log(width, height, offset);
+
         //			cache the image padding information
         self.offsetPadding = {
           top: parseInt($img.css('padding-top'), 10),
@@ -109,12 +111,10 @@ var waitForFinalEvent = (function () {
           zoomDelta: self.options.zoomStep
         });
         self.zimg = L.imageOverlay(self.img.src, self.bounds).addTo(self.map);
-
         self.map.options.minZoom = self.map.getBoundsZoom(self.bounds, false);
         self.map.fitBounds(self.bounds);
         self.bounds = self.map.getBounds();
         self.map.setMaxBounds(self.bounds);
-        /** 
         if (self.options.zoomMax !== null) {
           var lzoom = self.leafletZoom(self.options.zoomMax);
           if (lzoom < self.map.getZoom()) {
@@ -164,7 +164,6 @@ var waitForFinalEvent = (function () {
             self.map.options.maxZoom = self.leafletZoom(self.options.zoomMax);
           }, 300, $img[0].id);
         });
-        */
         self.options.onReady.call(self);
       }).each(function () {
         if (this.complete) { $(this).trigger("load"); }
