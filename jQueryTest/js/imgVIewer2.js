@@ -114,7 +114,7 @@ var waitForFinalEvent = (function () {
         self.map.fitBounds(self.bounds);
         self.bounds = self.map.getBounds();
         self.map.setMaxBounds(self.bounds);
-        /** 
+
         if (self.options.zoomMax !== null) {
           var lzoom = self.leafletZoom(self.options.zoomMax);
           if (lzoom < self.map.getZoom()) {
@@ -137,6 +137,7 @@ var waitForFinalEvent = (function () {
             self.options.onClick.call(self, ev.originalEvent, self.eventToImg(ev));
           }
         });
+        /** 
         self.map.on('zoomend', function () {
           if (self.options.zoomMax >= 1 && this.getZoom() > this.options.zoomMax) {
             this.setZoom(this.options.zoomMax);
