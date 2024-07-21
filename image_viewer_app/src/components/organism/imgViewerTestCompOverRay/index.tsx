@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from 'react';
+import { isValidElement, useEffect, useRef, useState } from 'react';
 import "leaflet/dist/leaflet.css"; // leafletのスタイルシートがないと、プラス-マイナスボタンが表示されない
 import { MapContainer, ImageOverlay, useMap, useMapEvent } from "react-leaflet";
 import { LatLng, LatLngBounds, CRS } from "leaflet";
@@ -43,11 +43,7 @@ function MapControll({ setBounds }: { setBounds: React.Dispatch<React.SetStateAc
 }
 
 export default function App({ children }: { children: React.ReactNode }) {
-  if (!children) {
-    return null;
-  }
-
-  if (!children.props) {
+  if (!isValidElement(children)) {
     return null;
   }
 
@@ -56,7 +52,7 @@ export default function App({ children }: { children: React.ReactNode }) {
   }
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const [dimensions, setDimensions] = useState<{ width: number, height: number }>({ width: 33, height: 11 }); // 0以外であればなんでもいい
+  const [dimensions, setDimensions] = useState<{ width: number, height: number }>({ width: 0, height: 0 });
   const [bounds, setBounds] = useState<LatLngBounds>(new LatLngBounds(new LatLng(0, 0), new LatLng(dimensions?.height / 2, dimensions?.width / 2)));
   const zoom = 1;
   const [src, setSrc] = useState<string>(children.props.src);
@@ -72,16 +68,13 @@ export default function App({ children }: { children: React.ReactNode }) {
   }, []);
 
   // 子コンポーネントが変更されたときにsrcを更新
+  // 記事を公開するタイミングでは消すかもしれない
+
   useEffect(() => {
-    if (!children || !children.props || !children.props?.src) {
-      return;
-    }
     setSrc(children.props.src);
   }, [children]);
-
-  if (!dimensions) {
-    return null;
-  }
+  const childStyle = children.props.style || {};
+  const childClassName = children.props.className || '';
 
   return (
     <>
@@ -98,9 +91,9 @@ export default function App({ children }: { children: React.ReactNode }) {
           maxBoundsViscosity={1.0} // マップの移動範囲を制限
           minZoom={1}
           maxZoom={10}
-          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 10 }}
+          style={{ ...childStyle, position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 10 }}
           attributionControl={false} // デフォルトの著作権表示を非表示
-          className='overlay'
+          className={childClassName}
         >
           {/** Map制御用のコンポーネント */}
           <MapControll setBounds={setBounds} />
