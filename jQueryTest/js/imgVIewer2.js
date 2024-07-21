@@ -137,7 +137,7 @@ var waitForFinalEvent = (function () {
             self.options.onClick.call(self, ev.originalEvent, self.eventToImg(ev));
           }
         });
-        /** 
+
         self.map.on('zoomend', function () {
           if (self.options.zoomMax >= 1 && this.getZoom() > this.options.zoomMax) {
             this.setZoom(this.options.zoomMax);
@@ -165,7 +165,7 @@ var waitForFinalEvent = (function () {
             self.map.options.maxZoom = self.leafletZoom(self.options.zoomMax);
           }, 300, $img[0].id);
         });
-        */
+
         self.options.onReady.call(self);
       }).each(function () {
         if (this.complete) { $(this).trigger("load"); }
