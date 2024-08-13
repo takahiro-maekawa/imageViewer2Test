@@ -29,9 +29,6 @@ export default function RootLayout({
       try {
         const result = await getData();
         setData(result);
-        if (result.length > 0) {
-          setTargetData(result[0]);
-        }
       } catch (error) {
         console.error('データの取得に失敗しました:', error);
       }
