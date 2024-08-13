@@ -12,7 +12,7 @@ export default function SelectArea({ data, setTargetData }: Props) {
     <>
       <div className="flex flex-wrap justify-center">
         {data.map((e) =>
-          <ImageCell key={e.id} data={e} setTargetData={setTargetData} className="w-1/6" />)}
+          <ImageCell key={e.id} data={e} setTargetData={setTargetData} />)}
       </div>
     </>
   )

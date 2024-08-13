@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <>
       <Header />
-      <div className="grid grid-cols-12">
+      <div className="grid grid-cols-1 md:grid-cols-12">
         <div className="col-span-1"></div>
         <div className="col-span-5">
           <SelectArea data={data} setTargetData={setTargetData} />
