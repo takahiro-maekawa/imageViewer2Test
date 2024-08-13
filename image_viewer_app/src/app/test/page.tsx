@@ -9,17 +9,7 @@ import SelectArea from '@/components/template/selectArea';
 import { fileInfoType, NONE } from '@/types/fileInfoType';
 import React, { useEffect, useState } from 'react';
 
-export const NoImageComponent = () => {
-  return (<>
-    <span>表示する画像がありません</span>
-  </>)
-}
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactElement;
-}) {
+export default function RootLayout() {
 
   const [data, setData] = useState<fileInfoType[]>([]);
   const [targetData, setTargetData] = useState<fileInfoType>(NONE);
@@ -45,7 +35,7 @@ export default function RootLayout({
           <SelectArea data={data} setTargetData={setTargetData} />
         </div>
         <div className="col-span-5">
-          {targetData == NONE ? <NoImageComponent /> : <ImageView data={targetData} />}
+          <ImageView data={targetData} />
         </div>
         <div className="col-span-1"></div>
       </div>
