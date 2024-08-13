@@ -1,4 +1,3 @@
-import ImageOnLabel from "@/components/molecule/imageOnLabel";
 import ImageCell from "@/components/organism/ImageCell";
 import { fileInfoType } from "@/types/fileInfoType";
 
