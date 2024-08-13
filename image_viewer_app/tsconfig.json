@@ -33,7 +33,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/lib/imageViewer2.js"
-  ],
+, ".next/types/app/test/page.tsx"  ],
   "exclude": [
     "node_modules"
   ]

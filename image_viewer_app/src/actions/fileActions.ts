@@ -11,7 +11,7 @@ import { fileInfoType } from "@/types/fileInfoType";
 */
 export const getData = async () => {
   const data = [
-    { id: 1, text: "label", imageUrl: "https://images.ygoprodeck.com/images/cards/62089826.jpg" },
-    { id: 2, text: "label2", imageUrl: "https://images.ygoprodeck.com/images/cards/62089826.jpg" }];
+    { id: 1, text: "あああ", imageUrl: "https://images.ygoprodeck.com/images/cards/62089826.jpg" },
+    { id: 2, text: "label2", imageUrl: "https://images.ygoprodeck.com/images/cards/23995348.jpg" }];
   return data as fileInfoType[];
 }
