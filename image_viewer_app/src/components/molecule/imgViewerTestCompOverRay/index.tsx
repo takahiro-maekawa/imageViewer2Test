@@ -4,7 +4,10 @@ import "leaflet/dist/leaflet.css"; // leafletのスタイルシートがない�
 import { MapContainer, ImageOverlay, useMap, useMapEvent } from "react-leaflet";
 import { LatLng, LatLngBounds, CRS } from "leaflet";
 
-function MapControll({ setBounds }: { setBounds: React.Dispatch<React.SetStateAction<LatLngBounds>> }) {
+function MapControll({ setBounds, loading }: { setBounds: React.Dispatch<React.SetStateAction<LatLngBounds>>, loading: boolean }) {
+  if (loading) {
+    return;
+  }
 
   // マップのサイズが変更された時にマップの移動範囲を更新するために準備
   const map = useMap();
@@ -16,7 +19,8 @@ function MapControll({ setBounds }: { setBounds: React.Dispatch<React.SetStateAc
 
   // マウント時にイベントリスナーを追加
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    // クライアントサイドでのみ実行
+    if (typeof window !== null) {
       // ウィンドウそのものにリサイズイベントを追加
       window.addEventListener('resize', handleWindowResize);
 
@@ -37,7 +41,6 @@ function MapControll({ setBounds }: { setBounds: React.Dispatch<React.SetStateAc
   // マップのサイズが変更された時にマップの移動範囲を更新するために準備
   const onResize = () => {
     map.setZoom(1);
-    console.log(map.getBounds())
     setBounds(map.getBounds());
     map.setMaxBounds(map.getBounds());
   }
@@ -107,7 +110,7 @@ const App: React.FC<{ children: ReactElement<{ src: string }> | null }> = ({ chi
           className={childClassName}
         >
           {/** Map制御用のコンポーネント */}
-          <MapControll setBounds={setBounds} />
+          <MapControll setBounds={setBounds} loading={loading} />
           {/** 画像 */}
           <ImageOverlay url={src} bounds={bounds} />
         </MapContainer>
