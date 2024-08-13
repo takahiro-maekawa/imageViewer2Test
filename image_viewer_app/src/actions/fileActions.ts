@@ -6,7 +6,7 @@ export const getData = async () => {
     { id: 2, text: "label2", imageUrl: "https://images.ygoprodeck.com/images/cards/23995348.jpg" },
     { id: 3, text: "label1", imageUrl: "https://images.ygoprodeck.com/images/cards/73356503.jpg" },
     { id: 4, text: "label1", imageUrl: "https://images.ygoprodeck.com/images/cards/572850.jpg" },
-    { id: 5, text: "label1", imageUrl: "https://images.ygoprodeck.com/images/cards/48905153.jpg" },
+    { id: 5, text: "label1", imageUrl: "https://images.ygoprodeck.com/images/cards/14536035.jpg" },
     { id: 6, text: "label1", imageUrl: "https://images.ygoprodeck.com/images/cards/65734501.jpg" }];
   return data as fileInfoType[];
 }
