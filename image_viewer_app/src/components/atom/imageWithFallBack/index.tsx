@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Image, { ImageProps } from 'next/image';
 
 // 元々のPropsで必須となっているものは、継承によってそのまま使える
-interface Props extends ImageProps{
+interface Props extends ImageProps {
   src: string,
   fallback: string,
 }
@@ -14,7 +14,7 @@ const ImageWithFallback = ({
   fallback,
   src,
   ...props
-}:Props) => {
+}: Props) => {
   const [error, setError] = useState<boolean>(false);
 
   // srcが変わったら一度errorをfalseにして様子を見る

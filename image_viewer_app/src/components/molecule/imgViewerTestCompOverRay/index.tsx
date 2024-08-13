@@ -5,9 +5,6 @@ import { MapContainer, ImageOverlay, useMap, useMapEvent } from "react-leaflet";
 import { LatLng, LatLngBounds, CRS } from "leaflet";
 
 function MapControll({ setBounds, loading }: { setBounds: React.Dispatch<React.SetStateAction<LatLngBounds>>, loading: boolean }) {
-  if (loading) {
-    return;
-  }
 
   // マップのサイズが変更された時にマップの移動範囲を更新するために準備
   const map = useMap();
@@ -23,6 +20,8 @@ function MapControll({ setBounds, loading }: { setBounds: React.Dispatch<React.S
     if (typeof window !== null) {
       // ウィンドウそのものにリサイズイベントを追加
       window.addEventListener('resize', handleWindowResize);
+
+      map.setZoom(1);
 
       // 描画境界を設定
       setBounds(map.getBounds());
