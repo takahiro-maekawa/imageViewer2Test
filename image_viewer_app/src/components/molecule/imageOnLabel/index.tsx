@@ -11,7 +11,6 @@ export default function ImageOnLabel({ labelText, imageUrl, className }: Props) 
   const classNameImage = className ? `${className} ${classNameDefault}` : classNameDefault;
 
   return (
-
     <>
       <div className={classNameImage}>
         <ImageWithFallback

@@ -45,7 +45,7 @@ export default function RootLayout({
       <div className="grid grid-cols-12">
         <div className="col-span-1"></div>
         <div className="col-span-5">
-          <SelectArea data={data} />
+          <SelectArea data={data} setTargetData={setTargetData} />
         </div>
         <div className="col-span-5">
           {targetData == NONE ? <NoImageComponent /> : <ImageView data={targetData} />}
