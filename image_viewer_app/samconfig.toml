@@ -1,0 +1,10 @@
+version = 0.1
+[default.deploy.parameters]
+stack_name = "imgviewer2"
+resolve_s3 = true
+s3_prefix = "imgviewer2"
+region = "ap-northeast-1"
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+parameter_overrides = "StackFamily=\"nextjs-lambda-app\""
+image_repositories = ["NextFunction=240781352644.dkr.ecr.ap-northeast-1.amazonaws.com/imgviewer218590a5a/nextfunction32389377repo"]
