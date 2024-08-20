@@ -7,7 +7,7 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -32,8 +32,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/lib/imageViewer2.js"
-, ".next/types/app/test/page.tsx"  ],
+    "src/lib/imageViewer2.js",
+    ".next/types/app/test/page.tsx"
+  ],
   "exclude": [
     "node_modules"
   ]

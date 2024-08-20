@@ -4,7 +4,7 @@ import "leaflet/dist/leaflet.css"; // leafletのスタイルシートがない�
 import { MapContainer, ImageOverlay, useMap, useMapEvent } from "react-leaflet";
 import { LatLng, LatLngBounds, CRS } from "leaflet";
 
-function MapControll({ setBounds, loading }: { setBounds: React.Dispatch<React.SetStateAction<LatLngBounds>>, loading: boolean }) {
+function MapControll({ setBounds, loading }) {
 
   // マップのサイズが変更された時にマップの移動範囲を更新するために準備
   const map = useMap();
@@ -49,7 +49,7 @@ function MapControll({ setBounds, loading }: { setBounds: React.Dispatch<React.S
 }
 
 // MapControlを入れて
-const App: React.FC<{ children: ReactElement<{ src: string }> | null }> = ({ children }: { children: React.ReactNode }) => {
+const App = ({ children }: { children: React.ReactNode }) => {
   // 子コンポーネントが有効な形式であることを確認
   if (!isValidElement(children)) {
     throw new Error("Child Component is not valid");
@@ -61,7 +61,8 @@ const App: React.FC<{ children: ReactElement<{ src: string }> | null }> = ({ chi
   }
 
   const [bounds, setBounds] = useState<LatLngBounds>(new LatLngBounds(new LatLng(0, 0), new LatLng(0, 0)));
-  const [src, setSrc] = useState<string>(children.props.src);
+  //const [src, setSrc] = useState<string>(children.props.src);
+  const src = children.props.src;
   const zoom = 1;
   const zoomStep = 1;
 
@@ -74,7 +75,7 @@ const App: React.FC<{ children: ReactElement<{ src: string }> | null }> = ({ chi
     const img = new Image();
     img.src = children.props.src;
     img.onload = () => setLoading(false);
-    setSrc(children.props.src);
+    //setSrc(children.props.src);
   }, [children]);
 
   // ロード中であればLoadingを表示
