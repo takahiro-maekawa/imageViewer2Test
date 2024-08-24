@@ -10,20 +10,15 @@ import { fileInfoType, NONE } from '@/types/fileInfoType';
 import React, { useEffect, useState } from 'react';
 
 export default function RootLayout() {
-
   const [data, setData] = useState<fileInfoType[]>([]);
   const [targetData, setTargetData] = useState<fileInfoType>(NONE);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await getData();
-        setData(result);
-      } catch (error) {
-        console.error('データの取得に失敗しました:', error);
-      }
+    const fetchAndSetData = async () => {
+      const result = await getData();
+      setData(result);
     };
-    fetchData();
+    fetchAndSetData();
   }, []);
 
   return (
@@ -32,7 +27,7 @@ export default function RootLayout() {
       <div className="grid grid-cols-1 md:grid-cols-12">
         <div className="col-span-1"></div>
         <div className="col-span-5">
-          <SelectArea data={data} setTargetData={setTargetData} />
+          {data == null ? <></> : <SelectArea data={data} setTargetData={setTargetData} />}
         </div>
         <div className="col-span-5">
           <ImageView data={targetData} />
