@@ -8,5 +8,7 @@ export const getData = async () => {
     { id: 4, text: "label1", imageUrl: "https://images.ygoprodeck.com/images/cards/572850.jpg" },
     { id: 5, text: "label1", imageUrl: "https://images.ygoprodeck.com/images/cards/14536035.jpg" },
     { id: 6, text: "label1", imageUrl: "https://images.ygoprodeck.com/images/cards/65734501.jpg" }];
+
+  await new Promise(resolve => setTimeout(resolve, 1000));
   return data as fileInfoType[];
 }

@@ -12,12 +12,18 @@ import React, { useEffect, useState } from 'react';
 export default function RootLayout() {
   const [data, setData] = useState<fileInfoType[]>([]);
   const [targetData, setTargetData] = useState<fileInfoType>(NONE);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // データ更新を任意のタイミングで可能にするために、データ更新用の関数を準備
+  const fetchAndSetData = async () => {
+    setIsLoading(true);
+    setTargetData(NONE);
+    const result = await getData();
+    setData(result);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
-    const fetchAndSetData = async () => {
-      const result = await getData();
-      setData(result);
-    };
     fetchAndSetData();
   }, []);
 
@@ -27,7 +33,7 @@ export default function RootLayout() {
       <div className="grid grid-cols-1 md:grid-cols-12">
         <div className="col-span-1"></div>
         <div className="col-span-5">
-          {data == null ? <></> : <SelectArea data={data} setTargetData={setTargetData} />}
+          {isLoading ? <><span>データ取り込み中</span></> : <SelectArea data={data} setTargetData={setTargetData} />}
         </div>
         <div className="col-span-5">
           <ImageView data={targetData} />
