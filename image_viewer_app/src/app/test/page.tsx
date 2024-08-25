@@ -6,7 +6,7 @@ import Footer from '@/components/template/footer';
 import Header from '@/components/template/header';
 import ImageView from '@/components/template/imageView';
 import SelectArea from '@/components/template/selectArea';
-import ApiForm from '@/components/template/apiForm';
+import ApiForm from '@/components/template/apiSubmit';
 import { fileInfoType, NONE } from '@/types/fileInfoType';
 import React, { useEffect, useState } from 'react';
 
@@ -36,13 +36,12 @@ export default function RootLayout() {
         <div className="col-span-1"></div>
         {apiKeyEncripted == "" ?
           <div className="col-span-10">
-            <ApiForm />
+            <ApiForm setApiKeyEncripted={setApiKeyEncripted} fetchAndSetData={fetchAndSetData} />
           </div> :
           <>
             <div className="col-span-5">
-              {
-                isLoading ? <><span>データ取り込み中</span></> :
-                  <SelectArea data={data} setTargetData={setTargetData} />}
+              {isLoading ? <><span>データ取り込み中</span></> :
+                <SelectArea data={data} setTargetData={setTargetData} />}
             </div>
             <div className="col-span-5">
               <ImageView data={targetData} />
