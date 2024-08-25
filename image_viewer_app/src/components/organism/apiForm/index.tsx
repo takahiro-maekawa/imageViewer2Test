@@ -10,7 +10,7 @@ export default function ApiForm({ setApiKeyEncripted, fetchAndSetData }: Props) 
     const formData = new FormData(event.target as HTMLFormElement);
     const apiKey = formData.get('apiKey') as string;
     setApiKeyEncripted(apiKey);
-    fetchAndSetData();
+    fetchAndSetData(apiKey);
   }
 
   return (
