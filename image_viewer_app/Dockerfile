@@ -1,5 +1,5 @@
 # ビルドステージ
-FROM node:20-buster-slim as builder
+FROM public.ecr.aws/docker/library/node:20.9.0-slim as builder
 
 WORKDIR /build
 
@@ -12,7 +12,7 @@ RUN rm -rf .next
 RUN npm run build 
 
 # -----------------------------
-FROM node:20-buster-slim
+FROM public.ecr.aws/docker/library/node:20.9.0-slim
 
 COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:0.8.4 /lambda-adapter /opt/extensions/lambda-adapter
 ENV PORT 3030 ENV NODE_ENV=production
