@@ -3,16 +3,31 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
+    outputs:
+      time_stamp: ${{ steps.time_stamp.outputs.time_stamp }}
     steps:
     - uses: actions/checkout@v4
+    - name: Install AWS CLI
+      run: |
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        unzip awscliv2.zip
+        sudo ./aws/install
+    - name: save timestamp
+      id: time_stamp
+      run: echo "time_stamp=$(date +%s)" >> $GITHUB_ENV
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build ./image_viewer_app --file ./image_viewer_app/Dockerfile --tag img_viewer2_nextjs_action:${{ env.time_stamp }}
+    - name: login to docker hub
+      env:
+        AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.ap-northeast-1.amazonaws.com
+    - name: add tag to docker image
+      env:
+        AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+      run: docker tag img_viewer2_nextjs_action:${{ env.time_stamp }} ${AWS_ACCOUNT_ID}.dkr.ecr.ap-northeast-1.amazonaws.com/img_viewer2_nextjs_action:${{ env.time_stamp }}
