@@ -2,4 +2,4 @@
 
 [ ! -d '/tmp/cache' ] && mkdir -p /tmp/cache
 
-exec npm start
+npm start

@@ -27,7 +27,9 @@ COPY --from=builder /build/run.sh ./run.sh
 RUN ln -s /tmp/cache ./.next/cache
 
 EXPOSE 3030
-CMD [ "exec", "./run.sh" ]
+RUN chmod +x ./run.sh
+
+CMD ["sh", "-c", "./run.sh"]
 
 # docker build -t my-favorite-docker-image . でイメージをビルド
-# docker run -p 3000:3000 my-favorite-docker-image でコンテナを起動
+# docker run -dit -p 3030:3030 my-favorite-docker-image でコンテナを起動
