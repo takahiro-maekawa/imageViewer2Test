@@ -3,7 +3,7 @@ export default function Footer() {
     <>
       <div className="flex justify-center">
         <span>
-          フッターだお
+          フッターじゃよ
         </span>
       </div>
     </>
