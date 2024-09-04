@@ -11,6 +11,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     authorized({ request, auth }) {
       const { pathname } = request.nextUrl;
+      if (pathname === "/") {
+        return true;
+      }
       return !!auth;
     },
   },
