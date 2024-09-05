@@ -31,7 +31,6 @@ export default function RootLayout() {
   useEffect(() => {
     fetchAndSetData();
   }, []);
-
   return (
     <>
       <Header />
