@@ -7,8 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    outputs:
-      time_stamp: ${{ steps.time_stamp.outputs.time_stamp }}
     steps:
     - uses: actions/checkout@v4
     - name: Install AWS CLI
@@ -32,21 +30,24 @@ jobs:
         GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
         GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
         NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-        NEXTAUTH_URL: "http://localhost:3030"
+        NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+        time_stamp: ${{ env.time_stamp }}
       run: docker build ./image_viewer_app --file ./image_viewer_app/Dockerfile --tag img_viewer2_nextjs_action:${{ env.time_stamp }} --platform linux/amd64
     - name: login to docker hub
       env:
         AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.ap-northeast-1.amazonaws.com
+      run: aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-1.amazonaws.com
     - name: add tag to docker image
       env:
         AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-      run: docker tag img_viewer2_nextjs_action:${{ env.time_stamp }} ${AWS_ACCOUNT_ID}.dkr.ecr.ap-northeast-1.amazonaws.com/img_viewer2_nextjs_action:${{ env.time_stamp }}
+        time_stamp: ${{ env.time_stamp }}
+      run: docker tag img_viewer2_nextjs_action:${{ env.time_stamp }} ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-1.amazonaws.com/img_viewer2_nextjs_action:${{ env.time_stamp }}
     - name: push docker image
       env:
         AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+        time_stamp: ${{ env.time_stamp }}
       run: docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-1.amazonaws.com/img_viewer2_nextjs_action:${{ env.time_stamp }}
     - name: update Lambda
       env:
@@ -55,5 +56,5 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         LAMBDA_FUNCTION_NAME: ${{ secrets.LAMBDA_FUNCTION_NAME }}
         AWS_PAGER: ""
-      run: aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --image-uri ${AWS_ACCOUNT_ID}.dkr.ecr.ap-northeast-1.amazonaws.com/img_viewer2_nextjs_action:${{ env.time_stamp }} --region ap-northeast-1
-      
+        time_stamp: ${{ env.time_stamp }}
+      run: aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --image-uri ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-1.amazonaws.com/img_viewer2_nextjs_action:${{ env.time_stamp }} --region ap-northeast-1
