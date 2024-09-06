@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  db:
+    image: postgres:14.7-alpine
+    container_name: 'test-db-sandboxs'
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - ./db/init:/docker-entrypoint-initdb.d
+      - postgres_volume:/var/lib/postgresql/data
+volumes:
+  postgres_volume:
