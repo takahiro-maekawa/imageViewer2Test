@@ -26,6 +26,12 @@ COPY --from=builder /build/next.config.js ./
 COPY --from=builder /build/run.sh ./run.sh
 RUN ln -s /tmp/cache ./.next/cache
 
+ENV NEXTAUTH_URL=${NEXTAUTH_URL}
+ENV GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+ENV GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+ENV NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+ENV AUTH_TRUST_HOST=TRUE
+
 EXPOSE 3030
 RUN chmod +x ./run.sh
 
