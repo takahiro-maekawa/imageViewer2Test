@@ -1,5 +1,5 @@
 export default function Home() {
   return (<>
-    トップページです
+    トップページだ
   </>)
 }
