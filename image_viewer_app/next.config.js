@@ -23,6 +23,7 @@ const nextConfig = {
     AUTH_TRUST_HOST: process.env.AUTH_TRUST_HOST,
   },
   output: 'standalone',
+  basePath: '/imageViewer',
 }
 
 module.exports = nextConfig
