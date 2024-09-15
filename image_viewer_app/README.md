@@ -34,3 +34,13 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## drizzleの更新について
+データベースの更新については、rust製ライブラリである dieselを使っており、
+JS側から定義を作って更新することはありません。
+
+その代わり更新されたDBからスキーマファイル(schema.ts)を自動生成するために、以下のコマンドを使ってください。
+```
+npm run generate-schema
+```

@@ -8,15 +8,19 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "generate-schema": "drizzle-kit introspect --config drizzle.config.ts"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.33.0",
     "leaflet": "^1.9.4",
     "next": "14.2.4",
     "next-auth": "^5.0.0-beta.20",
+    "pg": "^8.12.0",
     "react": "^18",
     "react-dom": "^18",
     "react-leaflet": "^4.2.1",
@@ -36,6 +40,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "drizzle-kit": "^0.24.2",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
     "eslint-plugin-storybook": "^0.8.0",

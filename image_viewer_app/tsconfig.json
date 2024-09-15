@@ -33,7 +33,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/lib/imageViewer2.js",
-    ".next/types/app/test/page.tsx"
+    ".next/types/app/test/page.tsx",
+    "drizzle.config.ts"
   ],
   "exclude": [
     "node_modules"
