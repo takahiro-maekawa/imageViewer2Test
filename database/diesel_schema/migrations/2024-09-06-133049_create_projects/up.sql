@@ -38,3 +38,15 @@ CREATE TABLE permission_allocation (
     FOREIGN KEY (user_id) REFERENCES app_user(id),
     FOREIGN KEY (team_id) REFERENCES app_team(id)
 );
+
+INSERT INTO app_user (name, email) VALUES
+('hamaji', 'koma4024@gmail.com'),
+('tanaka', 'tanaka@example.com'),
+('suzuki', 'suzuki@example.com');
+
+INSERT INTO app_team (name, api_key) VALUES
+('ひまわり組', 'team1-key'),
+('team2', 'team2-key');
+
+INSERT INTO permission_allocation (user_id, team_id, ordinary_read) VALUES
+(1, 1, TRUE);
