@@ -4,7 +4,8 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
 const Welcome = () => {
-  return <div>Welcome to the Image Viewer</div>;
+  redirect('/front/imageViewer/welcome');
+  return <></>;
 }
 
 const MyApp = () => {
