@@ -1,6 +1,6 @@
 import { Session } from "next-auth";
 
-import { auth } from "@/lib/auth";
+import { auth } from "@/lib/auth/auth";
 import { redirect } from "next/navigation";
 
 const Welcome = () => {
