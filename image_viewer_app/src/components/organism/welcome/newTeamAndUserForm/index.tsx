@@ -18,7 +18,17 @@ export default function NewTeamAndUserForm() {
   const initialState = { message: null, errors: {} };
   const makeMyFirstTeamBinded = makeMyFirstTeam.bind(null);
   const [errorMessage, dispatch] = useFormState(makeMyFirstTeamBinded, initialState);
+
   return (<>
-    <SimpleForm bgColor={"bg-green-500"} isActivate={false} buttonComponent={buttonComponent2} />
+    <SimpleForm
+      formTitle={"新規にチームを作成したい方はこちらへ"}
+      bgColor={"bg-green-500"} buttonComponent={buttonComponent2}
+      formElements={[{
+        elementName: "チーム名",
+        elementId: "teamName",
+        placeholder: "チーム名を入力",
+        inputType: "text"
+      }]}
+      formAction={dispatch} />
   </>)
 }
