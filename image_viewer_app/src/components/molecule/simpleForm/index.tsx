@@ -28,7 +28,8 @@ const SimpleForm = ({ formTitle = "入力フォーム", bgColor = "bg-blue-500",
   return (
     <div className="px-3 py-4">
       <form className={`${bgColor} rounded-xl`} action={formAction}>
-        <div className="flex items-center space-x-2 px-2 py-2 justify-center"><span>{formTitle}</span></div>
+        <div className="flex items-center space-x-2 px-2 py-2 justify-center font-bold"><span>{formTitle}</span></div>
+
         {formElements?.map((element, index) => {
           return (
             <div className="flex items-center space-x-2 px-2 py-2" key={element.elementId} >
@@ -51,6 +52,7 @@ const SimpleForm = ({ formTitle = "入力フォーム", bgColor = "bg-blue-500",
             </div>
           )
         })}
+
         <div className="flex items-center justify-center py-3">
           {buttonComponent({ isActivate })}
         </div>
