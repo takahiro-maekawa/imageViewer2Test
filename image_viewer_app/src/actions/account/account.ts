@@ -18,7 +18,11 @@ export const getData = async () => {
  * 
  */
 export const findByEmail = async (email: string) => {
-  const data = await db.select().from(appUserInImage).where(eq(appUserInImage.email, email));
-
-  return data;
+  try {
+    const data = await db.select().from(appUserInImage).where(eq(appUserInImage.email, email));
+    return data;
+  } catch (error) {
+    console.error('Error fetching user by email:', error);
+    return [];
+  }
 }
