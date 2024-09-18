@@ -2,15 +2,23 @@ import '@/app/globals.css';
 
 import { AppFront } from '@/components/template/appFront';
 import { redirectIfNotHaveAccount } from '@/lib/account/rooting';
+import React, { ReactNode } from 'react';
 
 /**
  * appページ用のエンドポイント
  * @returns 
  */
-export default async function DefaultLayout({ children }: { children: React.ReactNode }) {
-  await redirectIfNotHaveAccount();
+const DefaultLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
+  React.useEffect(() => {
+    const checkAccount = async () => {
+      await redirectIfNotHaveAccount();
+    };
+    checkAccount();
+  }, []);
 
   return (
     <AppFront />
   );
-}
+};
+
+export default DefaultLayout;
