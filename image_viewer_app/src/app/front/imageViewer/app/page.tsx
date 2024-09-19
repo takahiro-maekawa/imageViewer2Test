@@ -1,15 +1,16 @@
+'use client';
 import '@/app/globals.css';
 
 import { AppFront } from '@/components/template/appFront';
 import { redirectIfNotHaveAccount } from '@/lib/account/rooting';
-import React, { ReactNode } from 'react';
+import React, { useEffect } from 'react';
 
 /**
  * appページ用のエンドポイント
  * @returns 
  */
 const DefaultLayout: React.FC = () => {
-  React.useEffect(() => {
+  useEffect(() => {
     const checkAccount = async () => {
       await redirectIfNotHaveAccount();
     };
