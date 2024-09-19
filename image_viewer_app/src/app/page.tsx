@@ -1,15 +1,5 @@
-import React, { ReactNode } from 'react';
-
-interface PageProps {
-  children: ReactNode;
+export default function Home() {
+  return (<>
+    トップページだ
+  </>)
 }
-
-const Page: React.FC<PageProps> = ({ children }) => {
-  return (
-    <div>
-      {children}
-    </div>
-  );
-};
-
-export default Page;
