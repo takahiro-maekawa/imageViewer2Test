@@ -8,7 +8,7 @@ import React, { ReactNode } from 'react';
  * appページ用のエンドポイント
  * @returns 
  */
-const DefaultLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
+const DefaultLayout: React.FC = () => {
   React.useEffect(() => {
     const checkAccount = async () => {
       await redirectIfNotHaveAccount();
