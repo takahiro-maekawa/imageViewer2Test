@@ -6,7 +6,6 @@
 #   features: []
 #   all-features: false
 
--e file:.
 blinker==1.8.2
 click==8.1.7
 flask==3.0.3
@@ -24,5 +23,4 @@ psycopg2-binary==2.9.9
 pytest==8.3.3
 sqlalchemy==2.0.35
 sync==1.0.0
-typing-extensions==4.12.2
 werkzeug==3.0.4

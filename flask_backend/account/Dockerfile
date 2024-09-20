@@ -23,4 +23,4 @@ COPY . .
 RUN pip3 install -r requirements.txt
 
 # Gunicornを使用してアプリケーションを起動
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8080", "src.tutorial.main:app"]
+CMD ["gunicorn", "-c", "gunicorn_config.py", "main:app"]

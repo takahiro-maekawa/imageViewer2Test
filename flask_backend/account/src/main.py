@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from account.controller.welcome_controller import welcome_blueprint
+from controller.welcome_controller import welcome_blueprint
 
 def create_app():
     app = Flask(__name__)
