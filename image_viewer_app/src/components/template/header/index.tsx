@@ -10,7 +10,7 @@ function HeaderComponent() {
         <div className="col-span-1"></div>
         <div className="col-span-10">
           <span>
-            ImageViewer2を再現するページです。（ToDO あとでちゃんと書く）
+            画像共有アプリ（仮題）
           </span>
         </div>
         <div className="col-span-1">
