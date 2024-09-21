@@ -12,6 +12,13 @@ class DevelopmentConfig:
     })
   SQLALCHEMY_TRACK_MODIFICATIONS = False
   SQLALCHEMY_ECHO = False
+  SQLALCHEMY_ENGINE_OPTIONS = {
+    'connect_args': {
+      'options': '-c search_path={schema}'.format(
+        schema=os.getenv('DB_SCHEMA', 'image')
+      )
+    }
+  }
 
 class TestingConfig:
   # SQLAlchemy

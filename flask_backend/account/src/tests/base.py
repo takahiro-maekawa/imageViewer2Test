@@ -8,7 +8,8 @@ from database import db
 class BaseTestCase(TestCase):
   def create_app(self):
     app.config.from_object('src.config.TestingConfig')
-    db.init_app(app)
+    if not ("sqlalchemy" in app.extensions):
+      db.init_app(app)
     return app
 
   def setUp(self):
@@ -17,6 +18,5 @@ class BaseTestCase(TestCase):
     db.session.commit()
 
   def tearDown(self):
-    print()
     db.session.remove()
     db.drop_all()
