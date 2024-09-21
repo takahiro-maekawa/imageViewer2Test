@@ -1,18 +1,14 @@
 from starlette.testclient import TestClient
 from src.main import app, get_db
-
 def temp_db(f):
     def func(SessionLocal, *args, **kwargs):
         # テスト用のDBに接続するためのsessionmaker instanse
         #  (SessionLocal) をfixtureから受け取る
-
         def override_get_db():
             try:
                 db = SessionLocal()
-                db.begin()
                 yield db
             finally:
-                db.rollback()
                 db.close()
 
         # fixtureから受け取るSessionLocalを使うようにget_dbを強制的に変更
