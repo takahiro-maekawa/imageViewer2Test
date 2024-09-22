@@ -30,7 +30,7 @@
           <mxGeometry x="670" y="90" width="100.23" height="90" as="geometry" />
         </mxCell>
         <mxCell id="fsGPkaUiXoxHUEZwdyoa-19" value="" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Docker.svg;" vertex="1" parent="fsGPkaUiXoxHUEZwdyoa-3">
-          <mxGeometry x="570" y="190" width="109.76" height="90" as="geometry" />
+          <mxGeometry x="560.24" y="200" width="109.76" height="90" as="geometry" />
         </mxCell>
         <mxCell id="fsGPkaUiXoxHUEZwdyoa-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=3;" edge="1" parent="fsGPkaUiXoxHUEZwdyoa-3" source="fsGPkaUiXoxHUEZwdyoa-23" target="fsGPkaUiXoxHUEZwdyoa-5">
           <mxGeometry relative="1" as="geometry" />
@@ -58,9 +58,6 @@
         <mxCell id="fsGPkaUiXoxHUEZwdyoa-37" value="Welcome&#xa;(PORT: 3000)" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://images.ctfassets.net/23aumh6u8s0i/6pjUKboBuFLvCKkE3esaFA/5f2101d6d2add5c615db5e98a553fc44/nextjs.jpeg;strokeWidth=5;imageBorder=#19FF40;" vertex="1" parent="fsGPkaUiXoxHUEZwdyoa-3">
           <mxGeometry x="150" y="610" width="100" height="89.79" as="geometry" />
         </mxCell>
-        <mxCell id="fsGPkaUiXoxHUEZwdyoa-42" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://next-auth.js.org/img/logo/logo-sm.png;" vertex="1" parent="fsGPkaUiXoxHUEZwdyoa-3">
-          <mxGeometry x="470" y="180" width="54.35" height="60" as="geometry" />
-        </mxCell>
         <mxCell id="fsGPkaUiXoxHUEZwdyoa-43" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://next-auth.js.org/img/logo/logo-sm.png;" vertex="1" parent="fsGPkaUiXoxHUEZwdyoa-3">
           <mxGeometry x="240" y="580" width="54.35" height="60" as="geometry" />
         </mxCell>
@@ -75,6 +72,9 @@
         </mxCell>
         <mxCell id="fsGPkaUiXoxHUEZwdyoa-52" value="直接アクセスを&lt;div&gt;ブロックしたい&lt;/div&gt;" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;position2=0;" vertex="1" parent="fsGPkaUiXoxHUEZwdyoa-3">
           <mxGeometry x="-40" y="370" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="fsGPkaUiXoxHUEZwdyoa-53" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://next-auth.js.org/img/logo/logo-sm.png;" vertex="1" parent="fsGPkaUiXoxHUEZwdyoa-3">
+          <mxGeometry x="750" y="50" width="54.35" height="60" as="geometry" />
         </mxCell>
         <mxCell id="fsGPkaUiXoxHUEZwdyoa-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=4;" edge="1" parent="1" source="fsGPkaUiXoxHUEZwdyoa-11" target="fsGPkaUiXoxHUEZwdyoa-5">
           <mxGeometry relative="1" as="geometry" />
