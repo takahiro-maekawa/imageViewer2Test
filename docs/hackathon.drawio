@@ -27,10 +27,10 @@
           <mxGeometry x="492" y="230" width="78" height="78" as="geometry" />
         </mxCell>
         <mxCell id="fsGPkaUiXoxHUEZwdyoa-18" value="Main&#xa;(PORT: 3001)" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://images.ctfassets.net/23aumh6u8s0i/6pjUKboBuFLvCKkE3esaFA/5f2101d6d2add5c615db5e98a553fc44/nextjs.jpeg;imageBorder=#0873FF;strokeWidth=6;" vertex="1" parent="fsGPkaUiXoxHUEZwdyoa-3">
-          <mxGeometry x="660" y="80" width="100.23" height="90" as="geometry" />
+          <mxGeometry x="670" y="90" width="100.23" height="90" as="geometry" />
         </mxCell>
         <mxCell id="fsGPkaUiXoxHUEZwdyoa-19" value="" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Docker.svg;" vertex="1" parent="fsGPkaUiXoxHUEZwdyoa-3">
-          <mxGeometry x="560" y="180" width="109.76" height="90" as="geometry" />
+          <mxGeometry x="570" y="190" width="109.76" height="90" as="geometry" />
         </mxCell>
         <mxCell id="fsGPkaUiXoxHUEZwdyoa-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=3;" edge="1" parent="fsGPkaUiXoxHUEZwdyoa-3" source="fsGPkaUiXoxHUEZwdyoa-23" target="fsGPkaUiXoxHUEZwdyoa-5">
           <mxGeometry relative="1" as="geometry" />
@@ -70,7 +70,7 @@
         <mxCell id="fsGPkaUiXoxHUEZwdyoa-45" value="疎通確認ができたら&lt;div&gt;CloudFrontを利用&lt;/div&gt;" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;position2=0.06;" vertex="1" parent="fsGPkaUiXoxHUEZwdyoa-3">
           <mxGeometry x="290" y="10" width="170" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="fsGPkaUiXoxHUEZwdyoa-50" value="QA：&lt;div&gt;リダイレクト元を判断して、&lt;/div&gt;&lt;div&gt;Welcomeアプリ経由のアクセスに限定するか&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;position2=0;align=left;spacing=8;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="fsGPkaUiXoxHUEZwdyoa-3">
+        <mxCell id="fsGPkaUiXoxHUEZwdyoa-50" value="Q：&lt;div&gt;リダイレクト元を判断して、&lt;/div&gt;&lt;div&gt;Welcomeアプリ経由のアクセスに限定する方法&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;position2=0;align=left;spacing=8;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="fsGPkaUiXoxHUEZwdyoa-3">
           <mxGeometry x="269.35" y="320" width="280.65" height="104" as="geometry" />
         </mxCell>
         <mxCell id="fsGPkaUiXoxHUEZwdyoa-52" value="直接アクセスを&lt;div&gt;ブロックしたい&lt;/div&gt;" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;position2=0;" vertex="1" parent="fsGPkaUiXoxHUEZwdyoa-3">
