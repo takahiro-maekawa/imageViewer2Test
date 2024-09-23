@@ -1,11 +1,11 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" version="24.7.13">
   <diagram name="ページ1" id="oKM_rWbbFsQeyxLx6hBT">
-    <mxGraphModel dx="1434" dy="785" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="486" dy="567" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="fsGPkaUiXoxHUEZwdyoa-3" value="AWS Cloud" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=0;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_aws_cloud_alt;strokeColor=#232F3E;fillColor=none;verticalAlign=top;align=left;spacingLeft=30;fontColor=#232F3E;dashed=0;" vertex="1" parent="1">
-          <mxGeometry x="380" y="120" width="810" height="750" as="geometry" />
+          <mxGeometry x="390" y="120" width="810" height="750" as="geometry" />
         </mxCell>
         <mxCell id="fsGPkaUiXoxHUEZwdyoa-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=4;" edge="1" parent="fsGPkaUiXoxHUEZwdyoa-3" source="fsGPkaUiXoxHUEZwdyoa-5" target="fsGPkaUiXoxHUEZwdyoa-6">
           <mxGeometry relative="1" as="geometry" />
@@ -65,7 +65,7 @@
           <mxGeometry x="290" y="10" width="170" height="70" as="geometry" />
         </mxCell>
         <mxCell id="fsGPkaUiXoxHUEZwdyoa-50" value="Q：&lt;div&gt;リダイレクト元を判断して、&lt;/div&gt;&lt;div&gt;Welcomeアプリ経由のアクセスに限定する方法&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;position2=0;align=left;spacing=8;fillColor=#f8cecc;strokeColor=#b85450;size=34;position=0.22;" vertex="1" parent="fsGPkaUiXoxHUEZwdyoa-3">
-          <mxGeometry x="269.35" y="320" width="280.65" height="104" as="geometry" />
+          <mxGeometry x="280" y="323" width="280.65" height="104" as="geometry" />
         </mxCell>
         <mxCell id="fsGPkaUiXoxHUEZwdyoa-52" value="直接アクセスを&lt;div&gt;ブロックしたい&lt;/div&gt;" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;position2=0;" vertex="1" parent="fsGPkaUiXoxHUEZwdyoa-3">
           <mxGeometry x="-40" y="370" width="140" height="70" as="geometry" />
