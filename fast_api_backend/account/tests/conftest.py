@@ -20,7 +20,7 @@ def SessionLocal():
     })
     
     engine = create_engine(
-        TEST_SQLALCHEMY_DATABASE_URL, connect_args={
+        TEST_SQLALCHEMY_DATABASE_URL, echo=True, connect_args={
             'options': '-c search_path={schema}'.format(
                 schema=os.getenv('DB_SCHEMA', 'image')
             )
