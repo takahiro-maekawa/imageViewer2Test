@@ -1,13 +1,16 @@
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
 
-from src.component.users import models
-from src.component.users import schemas
-from src.component.users.crud import get_user_by_email_query, create_user_query
+from src.component.users_ import models
+from src.component.users_ import schemas
+from src.component.users_.crud import get_user_by_email_query, create_user_query
 from src.component.database import SessionLocal, engine
+
+from src.component.user import models as UserModels
 
 # table作成
 models.Base.metadata.create_all(bind=engine)
+UserModels.Entity.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -30,4 +33,16 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
 
 @app.get("/")
 def hello():
+    return {"message": "Hello World"}
+
+@app.post("/welcome/new_team_and_user")
+def create_team_and_user():
+    pass
+    
+    
+    
+    return {"message": "Hello World"}
+
+@app.post("/welcome/new_team_and_user")
+def create_team_and_user():
     return {"message": "Hello World"}

@@ -1,5 +1,8 @@
 from starlette.testclient import TestClient
 from src.main import app, get_db
+from src.component.users_.schemas import UserCreate
+from src.component.users_.crud import create_user_query, get_user_by_email_query
+
 def temp_db(f):
     def func(SessionLocal, *args, **kwargs):
         # テスト用のDBに接続するためのsessionmaker instanse
@@ -20,7 +23,6 @@ def temp_db(f):
 
     return func
 
-
 client = TestClient(app)
 
 
@@ -30,7 +32,17 @@ def test_create_user():
     assert response.status_code == 200
 
 
-@temp_db
-def test_create_user_2():
-    response = client.post("/users/", json={"email": "foo", "password": "fo"})
-    assert response.status_code == 200
+def test_db_unit(SessionLocal):
+    db = SessionLocal()
+    try:
+        create_user_query(db, UserCreate(email="foo", password="fo"))
+        user = get_user_by_email_query(db, "foo")
+        assert "foo" == user.email
+    finally:
+        db.close()
+
+# フォーム内容を整備
+# emailアドレスとチーム名を送って、データを更新できればおk
+
+# フォーム内容を整備
+# emailアドレスと招待コードを送って、データを更新できればおk

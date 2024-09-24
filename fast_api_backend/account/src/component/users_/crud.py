@@ -1,10 +1,10 @@
 from sqlalchemy.orm import Session
 from hashlib import md5 as hash_func
-from src.component.users import models
-from src.component.users import schemas
+from src.component.users_ import models
+from src.component.users_ import schemas
 
 
-def get_user_by_email_query(db: Session, email: str):
+def get_user_by_email_query(db: Session, email: str) -> models.User:
     """get user by email"""
     return db.query(models.User).filter(models.User.email == email).first()
 
