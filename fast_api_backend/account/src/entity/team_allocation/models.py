@@ -1,12 +1,10 @@
 from typing import List, Optional
 
 from sqlalchemy import ForeignKey
-from sqlalchemy import Integer
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
-from src.component.database import Base
-from src.component.common.entity import Entity
+from src.entity.entity import Entity
 
 class PermissionAllocation(Entity):
     __tablename__ = "permission_allocation"
@@ -36,4 +34,6 @@ class AppUser(Entity):
 class AppTeam(Entity):
     __tablename__ = "app_team"
     id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column()
+    api_key: Mapped[str] = mapped_column()
     allocation: Mapped[List["PermissionAllocation"]] = relationship(back_populates="team")
