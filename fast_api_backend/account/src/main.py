@@ -9,8 +9,8 @@ from src.component.database import SessionLocal, engine
 from src.component.user import models as UserModels
 
 # table作成
-models.Base.metadata.create_all(bind=engine)
-UserModels.Entity.metadata.create_all(bind=engine)
+#models.Base.metadata.create_all(bind=engine)
+#UserModels.Entity.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -36,11 +36,7 @@ def hello():
     return {"message": "Hello World"}
 
 @app.post("/welcome/new_team_and_user")
-def create_team_and_user():
-    pass
-    
-    
-    
+def create_team_and_user():    
     return {"message": "Hello World"}
 
 @app.post("/welcome/new_team_and_user")

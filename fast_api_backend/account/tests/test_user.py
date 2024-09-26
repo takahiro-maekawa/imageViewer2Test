@@ -1,7 +1,7 @@
 from starlette.testclient import TestClient
 from src.main import app, get_db
-from src.component.users_.schemas import UserCreate
-from src.component.users_.crud import create_user_query, get_user_by_email_query
+from src.component.user.crud import insert, findById
+from src.component.user.models import AppUserTest
 
 def temp_db(f):
     def func(SessionLocal, *args, **kwargs):
@@ -32,12 +32,16 @@ def test_create_user():
     assert response.status_code == 200
 
 
-def test_db_unit(SessionLocal):
+# ユニットテストのサンプルは次の通りである
+# insertとfindByIdを使って、AppUserを作成し、取得することを確認する
+def test_db_unit_appUser(SessionLocal):
     db = SessionLocal()
     try:
-        create_user_query(db, UserCreate(email="foo", password="fo"))
-        user = get_user_by_email_query(db, "foo")
-        assert "foo" == user.email
+        userInserted = insert(db, AppUserTest(email="foor", name="fo"))
+        db.commit()
+        db.refresh(userInserted)
+        user = findById(db, 1)
+        assert 1 == user.id
     finally:
         db.close()
 

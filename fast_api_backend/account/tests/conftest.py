@@ -3,6 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import database_exists, drop_database
 from src.component.database import Base
+
 import os
 import dotenv
 
@@ -29,6 +30,11 @@ def SessionLocal():
 
     # Create test database and tables
     Base.metadata.create_all(engine)
+    #AppUser.__table__.create(bind=engine)
+    #Association.metadata.create_all(bind=engine)
+    #Parent.metadata.create_all(bind=engine)
+    #Child.metadata.create_all(bind=engine)
+    
     SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
     # Run the tests
