@@ -30,7 +30,6 @@ class AppUser(Entity):
     
     allocation: Mapped[List["PermissionAllocation"]] = relationship(back_populates="user")
 
-
 class AppTeam(Entity):
     __tablename__ = "app_team"
     id: Mapped[int] = mapped_column(primary_key=True)

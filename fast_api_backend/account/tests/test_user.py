@@ -1,7 +1,7 @@
 from starlette.testclient import TestClient
 from src.main import app, get_db
-from src.component.user.crud import insert, findById
-from src.component.user.models import AppUserTest
+from src.entity.team_allocation.crud import findAppUserById, insertAppUser, deleteAppUserByUserId, updateAppUser
+from src.entity.team_allocation.schemas import UserBase, UserForUpdate
 
 def temp_db(f):
     def func(SessionLocal, *args, **kwargs):
@@ -32,16 +32,29 @@ def test_create_user():
     assert response.status_code == 200
 
 
-# ユニットテストのサンプルは次の通りである
-# insertとfindByIdを使って、AppUserを作成し、取得することを確認する
+# テーブル単位のUT （app_userが対象）
 def test_db_unit_appUser(SessionLocal):
     db = SessionLocal()
     try:
-        userInserted = insert(db, AppUserTest(email="foor", name="fo"))
+        userInserted = insertAppUser(db, UserBase(email="foor", name="fo"))
         db.commit()
         db.refresh(userInserted)
-        user = findById(db, 1)
-        assert 1 == user.id
+        
+        # ユーザーの更新
+        userUpdated = updateAppUser(db, UserForUpdate(email="frings", name="fo", id=userInserted.id))
+        db.commit()
+
+        # 更新されたユーザーの取得
+        userUpdatedAfter = findAppUserById(db, userUpdated.id)
+        assert userUpdatedAfter.email == "frings"
+        
+        # ユーザーの削除
+        deleteAppUserByUserId(db, userInserted.id)
+        db.commit()
+        
+        # 削除されたユーザーの確認
+        userDeleted = findAppUserById(db, userInserted.id)
+        assert userDeleted is None
     finally:
         db.close()
 

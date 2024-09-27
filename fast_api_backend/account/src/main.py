@@ -6,12 +6,6 @@ from src.component.users_ import schemas
 from src.component.users_.crud import get_user_by_email_query, create_user_query
 from src.component.database import SessionLocal, engine
 
-from src.component.user import models as UserModels
-
-# table作成
-#models.Base.metadata.create_all(bind=engine)
-#UserModels.Entity.metadata.create_all(bind=engine)
-
 app = FastAPI()
 
 
