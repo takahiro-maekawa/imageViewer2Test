@@ -6,8 +6,19 @@ from src.component.users_ import schemas
 from src.component.users_.crud import get_user_by_email_query, create_user_query
 from src.component.database import SessionLocal, engine
 
-app = FastAPI()
+from src.config.container import Container
 
+from src.endpoints.welcome import welcome_router
+
+def createApp() -> FastAPI:
+    container = Container()
+    app = FastAPI()
+    app.container = container
+    app.include_router(welcome_router)  
+    
+    return app
+
+app = createApp()
 
 def get_db():
     """Dependency"""
@@ -18,21 +29,4 @@ def get_db():
         db.close()
 
 
-@app.post("/users/", response_model=schemas.User)
-def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
-    db_user = get_user_by_email_query(db=db, email=user.email)
-    if db_user:
-        raise HTTPException(status_code=400, detail="Email already registered")
-    return create_user_query(db=db, user=user)
 
-@app.get("/")
-def hello():
-    return {"message": "Hello World"}
-
-@app.post("/welcome/new_team_and_user")
-def create_team_and_user():    
-    return {"message": "Hello World"}
-
-@app.post("/welcome/new_team_and_user")
-def create_team_and_user():
-    return {"message": "Hello World"}

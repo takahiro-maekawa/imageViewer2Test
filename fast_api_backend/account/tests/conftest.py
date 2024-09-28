@@ -1,38 +1,18 @@
 import pytest
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy_utils import database_exists, drop_database
 from src.component.database import Base
 from src.entity.entity import Entity
 
-import os
-import dotenv
 
+from tests.config.database import DatabaseForTest
 @pytest.fixture(scope="function")
 def SessionLocal():
-    dotenv.load_dotenv()
     
-    # settings of test database
-    TEST_SQLALCHEMY_DATABASE_URL = 'postgresql+psycopg2://{user}:{password}@{host}/{database}'.format(
-    **{
-        'user': os.getenv('DB_USER', 'sample_user'),
-        'password': os.getenv('DB_PASSWORD', 'password'),
-        'host': os.getenv('DB_HOST', 'localhost:5432'),
-        'database': os.getenv('DB_DATABASE', 'test_schema'),
-    })
-    
-    engine = create_engine(
-        TEST_SQLALCHEMY_DATABASE_URL, echo=True, connect_args={
-            'options': '-c search_path={schema}'.format(
-                schema=os.getenv('DB_SCHEMA', 'image')
-            )
-        }
-    )
+    engine = DatabaseForTest()._engine
 
     # Create tables
     Entity.metadata.create_all(engine)
     
-    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+    SessionLocal = DatabaseForTest()._session_factory
 
     # Run the tests
     yield SessionLocal
