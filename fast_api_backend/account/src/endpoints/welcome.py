@@ -5,12 +5,7 @@ from src.config.container import Container, TestClassA
 from src.service.team_allocation import TeamAllocationService
 
 from fastapi import Depends, FastAPI, HTTPException
-from sqlalchemy.orm import Session
-
-from src.component.users_ import models
 from src.component.users_ import schemas
-
-from src.component.users_.crud import get_user_by_email_query, create_user_query
 
 welcome_router = APIRouter()
 

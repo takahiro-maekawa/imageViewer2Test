@@ -1,6 +1,6 @@
 from starlette.testclient import TestClient
+from src.repository.app_user import AppUserRepository
 from src.main import app
-from src.component.team_allocation.crud import findAppUserById, insertAppUser, deleteAppUserByUserId, updateAppUser
 from src.schema.team_allocation.schemas import UserBase, UserForUpdate
 from dependency_injector import providers
 from tests.config.database import DatabaseForTest
@@ -10,29 +10,32 @@ client = TestClient(app)
 
 # テーブル単位のUT （app_userが対象）
 def test_db_unit_appUser(SessionLocal):
+    repo = AppUserRepository()
     db = SessionLocal()
     try:
-        userInserted = insertAppUser(db, UserBase(email="foor", name="fo"))
+        # ユーザの追加
+        userInserted = repo.insertAppUser(db, UserBase(email="foor", name="fo"))
         db.commit()
         db.refresh(userInserted)
         
         # ユーザーの更新
-        userUpdated = updateAppUser(db, UserForUpdate(email="frings", name="fo", id=userInserted.id))
+        repo.updateAppUser(db, UserForUpdate(email="frings", name="fo", id=userInserted.id))
         db.commit()
         
         # 更新されたユーザーの取得
-        userUpdatedAfter = findAppUserById(db, userUpdated.id)
+        userUpdatedAfter = repo.findAppUserById(db, userInserted.id)
         assert userUpdatedAfter.email == "frings"
         
         # ユーザーの削除
-        deleteAppUserByUserId(db, userInserted.id)
+        repo.deleteAppUserByUserId(db, userInserted.id)
         db.commit()
         
         # 削除されたユーザーの確認
-        userDeleted = findAppUserById(db, userInserted.id)
+        userDeleted = repo.findAppUserById(db, userInserted.id)
         assert userDeleted is None
     finally:
         db.close()
+
 
 # フォーム内容を整備
 # emailアドレスとチーム名を送って、データを更新できればおk
@@ -62,7 +65,7 @@ def temp_db_container(f):
     return func
 
 """
-チュートリアルにあったテストを実行
+チュートリアルにあったリクエストテストを実行
 """
 @temp_db_container
 def test_create_user():
