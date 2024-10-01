@@ -39,30 +39,7 @@ def test_db_unit_appUser(SessionLocal):
 
 # フォーム内容を整備
 # emailアドレスとチーム名を送って、データを更新できればおk
-
-# フォーム内容を整備
-# emailアドレスと招待コードを送って、データを更新できればおk
-
-def temp_db_container(f):
-    def func(*args, **kwargs):
-        
-        db = DatabaseForTest()
-        Entity.metadata.create_all(db._engine)
-    
-        # 既存のコンテナを取得
-        original_container = app.container
-        
-        test_db = providers.Singleton(DatabaseForTest)
-        original_container.db.override(test_db)
-        
-        try:
-            # Run tests
-            f(*args, **kwargs)
-        finally:
-            Entity.metadata.drop_all(db._engine)
-            # データベース接続を元に戻す
-            original_container.db.reset_override()
-    return func
+from tests.config.database import temp_db_container
 
 """
 チュートリアルにあったリクエストテストを実行
