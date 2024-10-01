@@ -1,9 +1,8 @@
 import pytest
 from src.component.database import Base
 from src.entity.entity import Entity
-
-
 from tests.config.database import DatabaseForTest
+
 @pytest.fixture(scope="function")
 def SessionLocal():
     

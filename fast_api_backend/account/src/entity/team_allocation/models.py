@@ -12,12 +12,8 @@ class PermissionAllocation(Entity):
     team_id: Mapped[int] = mapped_column(
         ForeignKey("app_team.id"), primary_key=True
     )
-    ordinary_read: Mapped[bool] = mapped_column()
-    ordinary_write: Mapped[bool] = mapped_column()
-    hyper_read: Mapped[bool] = mapped_column()
-    hyper_write: Mapped[bool] = mapped_column()
-    auth_read: Mapped[bool] = mapped_column()
-    auth_write: Mapped[bool] = mapped_column()
+    read_level: Mapped[int] = mapped_column(default=0)
+    write_level: Mapped[int] = mapped_column(default=0)
     
     user: Mapped["AppUser"] = relationship(back_populates="allocation")
     team: Mapped["AppTeam"] = relationship(back_populates="allocation")
@@ -36,3 +32,4 @@ class AppTeam(Entity):
     name: Mapped[str] = mapped_column()
     secret_key: Mapped[str] = mapped_column()
     allocation: Mapped[List["PermissionAllocation"]] = relationship(back_populates="team")
+    

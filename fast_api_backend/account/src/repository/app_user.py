@@ -19,6 +19,7 @@ class AppUserRepository:
   def insertAppUser(self, db: Session, user: schemas.UserBase) -> models.AppUser:
     db_user = models.AppUser(name=user.name, email=user.email)
     db.add(db_user)
+    db.flush()
     return db_user
 
   """
@@ -26,7 +27,7 @@ class AppUserRepository:
   トランザクション境界内で呼び出すこと
   """
   def updateAppUser(self, db: Session, user: schemas.UserForUpdate) -> models.AppUser:
-    db.query(models.AppUser).filter(models.AppUser.id == user.id).update(user.model_dump())
+    db.query(models.AppUser).filter(models.AppUser.id == user.id).update(user.to_dict())
 
   """
   削除処理を行うメソッド
