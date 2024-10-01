@@ -49,6 +49,8 @@ class PermissionAllocationBase(CustomBaseModel):
   id: Optional[int] = None
   
 class PermissionAllocationForCreate(PermissionAllocationBase):
+  team_id: Optional[int] = None
+  user_id: Optional[int] = None
   pass
   
 class PermissionAllocationForUpdate(PermissionAllocationBase):
