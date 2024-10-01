@@ -5,8 +5,6 @@ from src.entity.team_allocation import models
 from src.schema.team_allocation import schemas
 
 class AppTeamRepository:
-  def __init__(self):
-    pass
   
   def findAppTeamById(self, db: Session, id: int):
     return db.query(models.AppTeam).filter(models.AppTeam.id == id).first()

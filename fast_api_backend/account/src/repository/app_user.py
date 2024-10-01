@@ -3,9 +3,6 @@ from src.entity.team_allocation import models
 from src.schema.team_allocation import schemas
 
 class AppUserRepository:
-  def __init__(self):
-    pass
-  
   """
   id指定で参照処理を行うメソッド
   """
