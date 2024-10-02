@@ -3,7 +3,7 @@ from src.repository.app_team import AppTeamRepository
 from src.schema.team_allocation.schemas import PermissionAllocationBase, PermissionAllocationForCreate,TeamBase,  TeamCreate, UserBase
 from src.repository.permission_allocation import PermissionAllocationRepository
 from src.main import app
-from tests.conftest import temp_db_container
+from tests.config.database import temp_db_container
 
 client = TestClient(app)
 
@@ -43,6 +43,7 @@ def test_db_unit_allocation_new_team(SessionLocal, teamAllocationService):
   assert user.name == "test"
   assert user.id == 1
   
+  # フォロワーの存在も確認
   user2 = teamAllocationService.findAppUserById(id=2)
   assert user2.name == "test_follow"
   assert user2.id == 2
@@ -51,5 +52,5 @@ def test_db_unit_allocation_new_team(SessionLocal, teamAllocationService):
 # 特に意味はないエンドポイントのテスト
 @temp_db_container
 def test_create_user():
-    response = client.post("/users/", json={"email": "foo", "password": "fo"})
+    response = client.get("/welcome/new_team_and_user")
     assert response.status_code == 200

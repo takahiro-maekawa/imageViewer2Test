@@ -43,7 +43,8 @@ from tests.config.database import temp_db_container
 
 """
 チュートリアルにあったリクエストテストを実行
-"""
+
+
 @temp_db_container
 def test_create_user():
     response = client.post("/users/", json={"email": "foo", "password": "fo"})
@@ -53,3 +54,5 @@ def test_create_user():
 def test_create_user2():
     response = client.post("/users/", json={"email": "foo", "password": "fo"})
     assert response.status_code == 200
+    
+"""

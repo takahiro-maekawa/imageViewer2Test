@@ -1,7 +1,7 @@
 import pytest
 from src.repository.app_user import AppUserRepository
 from src.service.team_allocation import TeamAllocationService
-from src.component.database import Base
+from src.config.database import Base
 from src.entity.entity import Entity
 from tests.config.database import DatabaseForTest
 

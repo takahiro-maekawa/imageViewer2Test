@@ -1,5 +1,5 @@
 from sqlalchemy import Column, DateTime, Integer, String, Sequence
-from src.component.database import Base
+from src.config.database import Base
 
 class Entity(Base):
     __abstract__ = True  # 抽象基底クラスとして定義
