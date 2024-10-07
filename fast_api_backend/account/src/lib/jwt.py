@@ -5,6 +5,9 @@ from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 from cryptography.hazmat.primitives import hashes
 from jose import jwe
 
+import time
+import uuid
+
 def get_derived_encryption_key(secret: str, salt: str) -> bytes:
   """
   Derives a 64-byte encryption key using HKDF for A256CBC-HS512.
@@ -57,7 +60,7 @@ def decode_app_jwt(token: str) -> Dict[str, Any]:
     print(f"Error during decryption: {e}")
     raise e
 
-def encode_app_jwt(obj: Dict[str, Any]) -> str:
+def encode_app_jwt(obj: Dict[str, Any], expiration_days:int = 7) -> str:
   # Fetch the Auth.js secret and salt from the environment
   authjs_secret = "secret"
   authjs_salt = "saltdesu"
@@ -72,10 +75,23 @@ def encode_app_jwt(obj: Dict[str, Any]) -> str:
 
   # Decrypt the token using the derived key
   try:
-    data = jwe.encrypt(json.dumps(obj), key, algorithm='dir', encryption='A256CBC-HS512')
+    data = jwe.encrypt(json.dumps(add_sub_attribute(obj, expiration_days)), key, algorithm='dir', encryption='A256CBC-HS512')
     # Parse the decrypted data into JSON
     #encoded_token = data.encode('utf-8')
     return data.decode('utf-8')
   except Exception as e:
     print(f"Error during encryption: {e}")
     raise e
+  
+"""
+jweの前にフィールドを追加する
+- iat: 生成日時
+- exp: 有効期限
+- jti: JWT ID
+"""
+def add_sub_attribute(obj: Dict[str, Any], expiration_days:int = 7) ->  Dict[str, Any]:
+  new_obj = {key:value  for key, value in obj.items() }
+  new_obj["iat"] = int(time.time())
+  new_obj["exp"] = new_obj["iat"] + 60 * 60 * 24 * expiration_days
+  new_obj["jti"] = str(uuid.uuid4())
+  return new_obj
