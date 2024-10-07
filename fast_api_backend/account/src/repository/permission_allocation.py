@@ -1,16 +1,15 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from src.repository.app_team import AppTeamRepository
 from src.repository.app_user import AppUserRepository
 from src.entity.team_allocation import models
 from src.schema.team_allocation import schemas
-
 app_team_repo = AppTeamRepository()
 app_user_repo = AppUserRepository()
 
 class PermissionAllocationRepository:
   
   def findPermissionAllocationByPermissionId(self, db: Session, id: int):
-    return db.query(models.PermissionAllocation).filter(models.PermissionAllocation.id == id).first()
+    return db.query(models.PermissionAllocation).options(joinedload(models.PermissionAllocation.user)).options(joinedload(models.PermissionAllocation.team)).filter(models.PermissionAllocation.id == id).first()
   
   def insertAllocationWithNewTeamAndNewUser(self, db: Session, allocation: schemas.PermissionAllocationForCreate):
     allocation_object: dict = allocation.to_dict()
