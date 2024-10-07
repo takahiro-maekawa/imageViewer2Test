@@ -23,13 +23,10 @@ class AppUser(Entity):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column()
     email: Mapped[str] = mapped_column()
-    
     allocation: Mapped[List["PermissionAllocation"]] = relationship(back_populates="user")
 
 class AppTeam(Entity):
     __tablename__ = "app_team"
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column()
-    #secret_key: Mapped[str] = mapped_column()
     allocation: Mapped[List["PermissionAllocation"]] = relationship(back_populates="team")
-    

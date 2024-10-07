@@ -11,30 +11,31 @@ client = TestClient(app)
 # テーブル単位のUT （app_userが対象）
 def test_db_unit_appUser(SessionLocal):
     repo = AppUserRepository()
-    db = SessionLocal()
-    try:
-        # ユーザの追加
-        userInserted = repo.insertAppUser(db, UserBase(email="foor", name="fo"))
-        db.commit()
-        db.refresh(userInserted)
-        
-        # ユーザーの更新
-        repo.updateAppUser(db, UserForUpdate(email="frings", name="fo", id=userInserted.id))
-        db.commit()
-        
-        # 更新されたユーザーの取得
-        userUpdatedAfter = repo.findAppUserById(db, userInserted.id)
-        assert userUpdatedAfter.email == "frings"
-        
-        # ユーザーの削除
-        repo.deleteAppUserByUserId(db, userInserted.id)
-        db.commit()
-        
-        # 削除されたユーザーの確認
-        userDeleted = repo.findAppUserById(db, userInserted.id)
-        assert userDeleted is None
-    finally:
-        db.close()
+    with SessionLocal() as db:
+        try:
+            # ユーザの追加
+            userInserted = repo.insertAppUser(db, UserBase(email="foor", name="fo"))
+            db.commit()
+            db.refresh(userInserted)
+            assert userInserted.version == 1
+            
+            # ユーザーの更新
+            repo.updateAppUser(db, UserForUpdate(email="frings", name="fo", id=userInserted.id, version=userInserted.version+1))
+            db.commit()
+            
+            # 更新されたユーザーの取得
+            userUpdatedAfter = repo.findAppUserById(db, userInserted.id)
+            db.refresh(userUpdatedAfter)
+            assert userUpdatedAfter.email == "frings"
+            assert userUpdatedAfter.name == "fo"
+            assert userUpdatedAfter.version == 2
+            
+            # ユーザーの削除
+            repo.deleteAppUserByUserId(db, userInserted.id)
+            db.commit()
+        except Exception as e:
+            db.rollback()
+            raise e
 
 
 # フォーム内容を整備

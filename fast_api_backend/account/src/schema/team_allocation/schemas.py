@@ -21,6 +21,7 @@ class UserCreate(UserBase):
 
 class UserForUpdate(UserBase):
   id: int
+  version: Optional[int] = None
 
 class User(UserBase):
   """Output"""
