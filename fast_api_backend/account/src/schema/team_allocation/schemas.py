@@ -29,7 +29,7 @@ class User(UserBase):
   model_config = ConfigDict(from_attributes=True)
 
 class TeamBase(CustomBaseModel):
-  secret_key: Optional[str] = None
+  #secret_key: Optional[str] = None
   name: Optional[str] = None
   id: Optional[int] = None
 
@@ -39,7 +39,6 @@ class TeamCreate(TeamBase):
 class TeamForUpdate(TeamBase):
   id: int
   name: Optional[str] = None
-  secret_key: Optional[str] = None
   
 class PermissionAllocationBase(CustomBaseModel):    
   read_level: int = 0

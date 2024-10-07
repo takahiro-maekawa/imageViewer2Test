@@ -9,7 +9,7 @@ client = TestClient(app)
 
 # リポジトリのユニットテスト
 def test_db_unit_allocation_new_team(SessionLocal, teamAllocationService):
-  sample_team = TeamBase(name="judgeMonster", secret_key="hunter")
+  sample_team = TeamBase(name="judgeMonster")
   sample_user = UserBase(name="test", email="test@example.com")
   sample_user2 = UserBase(name="test_follow", email="follow@example.com")
   

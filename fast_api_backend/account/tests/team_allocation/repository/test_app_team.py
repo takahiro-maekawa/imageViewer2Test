@@ -30,16 +30,16 @@ def test_db_unit_appTeam(SessionLocal):
     updated = repo.findAppTeamById(db=db, id=initialTeam.id)
     
     assert updated.name == "judgeMonhun"
-    assert updated.secret_key == "hunter"
+    #assert updated.secret_key == "hunter"
     
-    updateModel = TeamForUpdate(secret_key="passphraze12", id=initialTeam.id )
+    updateModel = TeamForUpdate(id=initialTeam.id )
     
     repo.updateAppTeam(db = db, team=updateModel)
     
     updated = repo.findAppTeamById(db=db, id=initialTeam.id)
     
     assert updated.name == "judgeMonhun"
-    assert updated.secret_key == "passphraze12"
+    #assert updated.secret_key == "passphraze12"
     
     repo.deleteAppTeamByTeamId(db=db, team_id=initialTeam.id)
     db.commit()

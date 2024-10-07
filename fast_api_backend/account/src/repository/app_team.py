@@ -10,7 +10,7 @@ class AppTeamRepository:
     return db.query(models.AppTeam).filter(models.AppTeam.id == id).first()
   
   def insertAppTeam(self, db: Session, team: schemas.TeamBase) -> models.AppTeam:
-    db_team = models.AppTeam(name=team.name, secret_key=team.secret_key)
+    db_team = models.AppTeam(name=team.name)
     db.add(db_team)
     db.flush()
     return db_team

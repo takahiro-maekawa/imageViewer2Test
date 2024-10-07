@@ -17,7 +17,7 @@ class PermissionAllocationRepository:
     user = allocation_object["user"]
     db_user = app_user_repo.insertAppUser(db = db, user =schemas.UserBase(email=user["email"], name=user["name"]))
     team = allocation_object["team"]
-    db_team = app_team_repo.insertAppTeam(db = db, team = schemas.TeamBase(name=team["name"], secret_key=team["secret_key"]))
+    db_team = app_team_repo.insertAppTeam(db = db, team = schemas.TeamBase(name=team["name"]))
     
     read_level = allocation_object["read_level"]
     write_level = allocation_object["write_level"]
