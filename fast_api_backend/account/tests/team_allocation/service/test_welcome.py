@@ -1,3 +1,5 @@
+from src.repository.permission_allocation import PermissionAllocationRepository
+
 def test_allocation_new_user_with_new_team(teamAllocationService, SessionLocal):
   # サービスが機能していることを確認
   user = teamAllocationService.findAppUserById(id=1)
@@ -23,6 +25,7 @@ def test_allocation_new_user_with_existing_team(teamAllocationService, SessionLo
   
   allocation = teamAllocationService.findAllocationById(id=alloc["id"])
   assert allocation['user']['name'] == 'edgeMan'
+  assert allocation['is_admin'] == True
   
   # チーム情報が格納されたパスコードを生成
   passcode = teamAllocationService.exportPassCodeByTeamId(1)
@@ -44,24 +47,54 @@ def test_allocation_new_user_with_existing_team(teamAllocationService, SessionLo
   
   # 不適当なパスコードを埋め込んで認証を要求した場合
   allocDummy = teamAllocationService.createUserWithExistingTeamWithPasssCode(passcode="test", user_name="aaaa", user_email="aaaa@vmail.com")
-  assert allocDummy == None
+  assert allocDummy == {}
   
   # チームが１つだけ登録されていることを確認
   teamCount = teamAllocationService.countTeams()
+  assert teamCount == 1
   
   # ユーザが3人登録されていることを確認
-  # userCount = teamAllocationService.countUsers()
-    
+  userCount = teamAllocationService.countUsers()
+  assert userCount == 3
+  
+  # チームIDを条件にして、関連テーブルから登録情報を取得できることを確認
+  list = teamAllocationService.findAllocationsByTeamId(1)
+  
+  assert len(list) == 3
+  # 1つ目のオブジェクトの検証
+  assert list[0]["user_id"] == 1
+  assert list[0]["team_id"] == 1
+  assert list[0]["read_level"] == 2
+  assert list[0]["write_level"] == 2
+  assert list[0]["is_admin"] == True
+  assert list[0]["user"]["email"] == "edgeMann@cmail.com"
+  assert list[0]["user"]["name"] == "edgeMan"
+  assert list[0]["team"]["name"] == "trinity"
+  # 2つ目のオブジェクトの検証
+  assert list[1]["user_id"] == 2
+  assert list[1]["team_id"] == 1
+  assert list[1]["read_level"] == 0
+  assert list[1]["write_level"] == 0
+  assert list[1]["is_admin"] == False
+  assert list[1]["user"]["email"] == "judgeMann@cmail.com"
+  assert list[1]["user"]["name"] == "judgeMann"
+  assert list[1]["team"]["name"] == "trinity"
+  # 3つ目のオブジェクトの検証
+  assert list[2]["user_id"] == 3
+  assert list[2]["team_id"] == 1
+  assert list[2]["read_level"] == 0
+  assert list[2]["write_level"] == 0
+  assert list[2]["is_admin"] == False
+  assert list[2]["user"]["email"] == "aaaa@vmail.com"
+  assert list[2]["user"]["name"] == "aaaa"
+  assert list[2]["team"]["name"] == "trinity"
+  
   # ユーザのメルアドから関連テーブルを持って来れることを確認
-  # allocations = teamAllocationService.findAllocationsByUserEmail("aaaa@vmail.com")
-  
-  # メールアドレスを条件にして、ユーザを取得できることを確認
-  # user = teamAllocationService.findUsersByEmail("")
-  
-  # チーム名を条件にして、チームを取得できることを確認
-  # team = teamAllcationService.findTeamByTeamName("trinity")
-  
-  # 関連テーブルをチームIDを条件にして検索し、きちんと3人のユーザが紐づいたオブジェクトが取得できていることを確認
-  # team = teamAllocationService.findTeamAllocatedUsers(1)
-  
-  # 関連テーブルをユーザIDを条件にして検索し、1つずつのチームが紐づいていることを確認
+  allocations = teamAllocationService.findAllocationsByUserId(1)
+  assert len(allocations) == 1
+  assert allocations[0]["user_id"] == 1
+  assert allocations[0]["team_id"] == 1
+  assert allocations[0]["read_level"] == 2
+  assert allocations[0]["write_level"] == 2
+  assert allocations[0]["is_admin"] == True
+  assert allocations[0]["user"]["email"] == "edgeMann@cmail.com"

@@ -20,3 +20,9 @@ class AppTeamRepository:
     
   def deleteAppTeamByTeamId(self, db: Session, team_id: int):
     db.query(models.AppTeam).filter(models.AppTeam.id == team_id).delete()
+  
+  """
+  個数をカウントするメソッド
+  """
+  def count(self, db: Session):
+    return db.query(models.AppTeam).count()

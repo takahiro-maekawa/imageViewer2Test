@@ -32,3 +32,9 @@ class AppUserRepository:
   """
   def deleteAppUserByUserId(self, db: Session, user_id: int):
     db.query(models.AppUser).filter(models.AppUser.id == user_id).delete()
+  
+  """
+  個数をカウントするメソッド
+  """
+  def count(self, db: Session):
+    return db.query(models.AppUser).count()

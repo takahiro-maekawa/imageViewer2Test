@@ -17,26 +17,31 @@ def test_db_unit_allocation_new_team(SessionLocal, teamAllocationService):
   sample_allocation2 = PermissionAllocationForCreate(team_id = 1, user=sample_user2)
   
   with SessionLocal() as db:
-    permRepo :PermissionAllocationRepository = PermissionAllocationRepository()
-    teamRepo = AppTeamRepository()
-    permRepo.insertAllocationWithNewTeamAndNewUser(db=db, allocation=sample_allocation)
-    db.commit()
-    
-    allocation = permRepo.findPermissionAllocationByPermissionId(db = db, id = 1)
-    team = teamRepo.findAppTeamById(db = db, id = 1)
-    assert team.name == "judgeMonster"
-    
-    assert allocation.read_level == 2
-    assert allocation.write_level == 2
-    assert allocation.team_id == 1
-    assert allocation.user_id == 1
-    assert allocation.user.name == "test"
-    assert allocation.user.email == "test@example.com"
-    assert allocation.team.name == "judgeMonster"
-    
-    # 今度はフォロワーを追加
-    permRepo.insertAllocationWithExistingTeamAndNewUser(db=db, allocation=sample_allocation2)
-    db.commit()
+    try:
+      permRepo :PermissionAllocationRepository = PermissionAllocationRepository()
+      teamRepo = AppTeamRepository()
+      permRepo.insertAllocationWithNewTeamAndNewUser(db=db, allocation=sample_allocation)
+      db.commit()
+
+      allocation = permRepo.findPermissionAllocationByPermissionId(db = db, id = 1)
+      team = teamRepo.findAppTeamById(db = db, id = 1)
+      assert team.name == "judgeMonster"
+
+      assert allocation.read_level == 2
+      assert allocation.write_level == 2
+      assert allocation.team_id == 1
+      assert allocation.user_id == 1
+      assert allocation.user.name == "test"
+      assert allocation.user.email == "test@example.com"
+      assert allocation.team.name == "judgeMonster"
+
+      # 今度はフォロワーを追加
+      permRepo.insertAllocationWithExistingTeamAndNewUser(db=db, allocation=sample_allocation2)
+      db.commit()
+      allocation_list = permRepo.findAllcationListWithTeamId(db, 1)
+      assert len(allocation_list) == 2
+    finally:
+      db.close()
     
   # ユーザの存在を確認
   user = teamAllocationService.findAppUserById(id=1)
