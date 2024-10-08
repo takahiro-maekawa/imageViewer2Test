@@ -48,7 +48,40 @@ class TeamAllocationService(AbstractService):
     
     res =  self.permission_allocation_repository.insertAllocationWithNewTeamAndNewUser(session, dto)
     return res.__dict__ if res else None
-
+  
+  """
+  すでに存在しているチームに紐づくユーザを作成する
+  
+  """
+  @AbstractService.with_session
+  def createUserWithExistingTeamWithTeamId(self, session, team_id:int, user_name:str, user_email:str):
+    user = UserBase(name=user_name, email=user_email)
+    dto = PermissionAllocationForCreate(team_id = team_id, user=user)
+    res = self.permission_allocation_repository.insertAllocationWithExistingTeamAndNewUser(session, dto)
+    return res.__dict__ if res else None
+  
+  @AbstractService.with_session
+  def createUserWithExistingTeamWithPasssCode(self, session, passcode:str, user_name:str, user_email:str):
+    decoded = {}
+    try:
+      decoded = self.decodePassCode(passcode)
+    except Exception as e:
+      print(f"Error during decryption: {e}")
+      return None
+    
+    team_id = decoded["team_id"]
+    team = self.app_team_repository.findAppTeamById(session, team_id)
+    
+    if team is None:
+      return None
+    if decoded["team_name"] != team.name:
+      return None
+    
+    user = UserBase(name=user_name, email=user_email)
+    dto = PermissionAllocationForCreate(team_id = team_id, user=user)
+    res = self.permission_allocation_repository.insertAllocationWithExistingTeamAndNewUser(session, dto)
+    return res.__dict__ if res else None
+  
   def exportPassCodeByTeamId(self, team_id: int):
     team = self.findAppTeamById(id = team_id)
     if team is None:
