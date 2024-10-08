@@ -64,3 +64,13 @@ def test_interleave():
   for i in range(7):
     dim = i+1
     assert untiInterleaveString(interleaveString(target_string, dim), dim) == "kokogaorenoanpanmanda"
+
+def test_jwt_in_prod():
+  obj = {
+      "team_name": "sample",
+      "team_id": 3
+    }
+  encoded_token = encode_app_jwt(obj, expiration_days=8)
+  decoded = decode_app_jwt(encoded_token)
+  
+  assert decoded["team_name"] == "sample"

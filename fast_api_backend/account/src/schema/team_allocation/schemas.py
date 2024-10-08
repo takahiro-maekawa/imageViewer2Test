@@ -44,6 +44,7 @@ class TeamForUpdate(TeamBase):
 class PermissionAllocationBase(CustomBaseModel):    
   read_level: int = 0
   write_level: int = 0
+  is_admin: bool = False
   team: Optional[TeamBase] = None
   user: Optional[UserBase] = None
   id: Optional[int] = None

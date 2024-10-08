@@ -40,14 +40,14 @@ def test_db_unit_allocation_new_team(SessionLocal, teamAllocationService):
     
   # ユーザの存在を確認
   user = teamAllocationService.findAppUserById(id=1)
-  assert user.name == "test"
-  assert user.id == 1
+  assert user['name'] == "test"
+  assert user['id'] == 1
   
   # フォロワーの存在も確認
   user2 = teamAllocationService.findAppUserById(id=2)
-  assert user2.name == "test_follow"
-  assert user2.id == 2
-  assert user2.email == "follow@example.com"
+  assert user2['name'] == "test_follow"
+  assert user2['id'] == 2
+  assert user2['email'] == "follow@example.com"
 
 # 特に意味はないエンドポイントのテスト
 @temp_db_container

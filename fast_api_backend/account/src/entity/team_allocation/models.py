@@ -14,6 +14,7 @@ class PermissionAllocation(Entity):
     )
     read_level: Mapped[int] = mapped_column(default=0)
     write_level: Mapped[int] = mapped_column(default=0)
+    is_admin: Mapped[bool] = mapped_column(default=False)
     
     user: Mapped["AppUser"] = relationship(back_populates="allocation")
     team: Mapped["AppTeam"] = relationship(back_populates="allocation")
